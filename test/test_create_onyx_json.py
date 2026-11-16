@@ -135,7 +135,6 @@ def test_create_analysis_fields_single_end_headline(monkeypatch):
             "version": "1.0",
             "homePage": "https://example.com",
         },
-        orange_box_version="v1",
     )
 
     assert isinstance(analysis, FakeOnyxAnalysis)
@@ -190,7 +189,6 @@ def test_create_analysis_fields_paired_end_headline_non_equal(monkeypatch):
             "version": "1.0",
             "homePage": "https://example.com",
         },
-        orange_box_version="v1",
     )
 
     assert isinstance(analysis, FakeOnyxAnalysis)
@@ -245,7 +243,6 @@ def test_create_analysis_fields_paired_end_headline_equal(monkeypatch):
             "version": "1.0",
             "homePage": "https://example.com",
         },
-        orange_box_version="v1",
     )
 
     assert isinstance(analysis, FakeOnyxAnalysis)
@@ -266,7 +263,6 @@ def test_main_store_onyx_writes_json(monkeypatch, tmp_path):
         "pipeline_info": "pipe,1.0,https://example.com",
         "readQC_result": "True",
         "readQC_file": [str(qcf)],
-        "orange_box_version": "v1",
     }
 
     monkeypatch.setattr(qc, "get_args", lambda: type("Args", (), args)())
@@ -347,7 +343,6 @@ def test_main_reads_false_branch_and_returns_fallback(monkeypatch, tmp_path):
         "pipeline_info": "pipe,1.0,https://example.com",
         "readQC_result": "False",
         "readQC_file": [],
-        "orange_box_version": "v1",
     }
 
     monkeypatch.setattr(qc, "get_args", lambda: type("Args", (), args)())
@@ -413,7 +408,6 @@ def test_main_creates_output_dir_if_missing(monkeypatch, tmp_path):
         "pipeline_info": "pipe,1.0,https://example.com",
         "readQC_result": "True",
         "readQC_file": [str(qcf)],
-        "orange_box_version": "v1",
     }
 
     monkeypatch.setattr(qc, "get_args", lambda: type("Args", (), args)())
@@ -511,7 +505,6 @@ def test_main_end_to_end_single_end_writes_json(monkeypatch, tmp_path):
         "pipeline_info": "fastq-read-stats,1.0,https://example.com",
         "readQC_result": "True",
         "readQC_file": [str(qc_file)],
-        "orange_box_version": "v1",
         "store_onyx": True,
         "test_onyx": False,
         "prod_onyx": False,
@@ -594,7 +587,6 @@ def test_main_end_to_end_paired_end_writes_json(monkeypatch, tmp_path):
         "pipeline_info": "fastq-read-stats,1.0,https://example.com",
         "readQC_result": "True",
         "readQC_file": [str(r1), str(r2)],
-        "orange_box_version": "v1",
         "store_onyx": True,
         "test_onyx": False,
         "prod_onyx": False,
