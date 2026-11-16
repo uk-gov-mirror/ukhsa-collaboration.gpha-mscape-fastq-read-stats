@@ -196,6 +196,7 @@ def create_analysis_fields(
 
     if query_exitcode == 0:
         methods_versions_fail = onyx_analysis.add_versions_to_methods(
+            tool_versions={"pipeline_info": pipeline_info},
             onyx_versions=onyx_versions,
         )
     else:
