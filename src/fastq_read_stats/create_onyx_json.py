@@ -71,14 +71,6 @@ def get_args():
         nargs="+",
         help="Filepath(s) for read QC results. Provide one file for single-end or two files for paired-end (R1 R2).",
     )
-    parser.add_argument(
-        "--context",
-        "-c",
-        dest="orange_box_version",
-        type=str,
-        required=False,
-        help="Orange box version used to determine if should run.",
-    )
 
     return parser.parse_args()
 
@@ -185,7 +177,6 @@ def create_analysis_fields(
     unclassified_qc_results: dict,
     server: str,
     pipeline_info: dict,
-    orange_box_version: str,
 ) -> tuple[oa.OnyxAnalysis, int]:
     onyx_analysis = oa.OnyxAnalysis()
     onyx_analysis.add_analysis_details(
@@ -205,7 +196,6 @@ def create_analysis_fields(
 
     if query_exitcode == 0:
         methods_versions_fail = onyx_analysis.add_versions_to_methods(
-            tool_versions={"orange_box_version": orange_box_version},
             onyx_versions=onyx_versions,
         )
     else:
@@ -275,10 +265,6 @@ def main():
     )
     set_up_logger(log_file)
 
-    orange_box_version = (
-        args.orange_box_version if args.orange_box_version else "unknown"
-    )
-
     if args.readQC_result == "True":
         # Get information from unclassified read QC result files
         result_dict = get_unclassified_results(args.readQC_file)
@@ -297,7 +283,6 @@ def main():
         unclassified_qc_results=result_dict,
         server=args.server,
         pipeline_info=pipeline_dict,
-        orange_box_version=orange_box_version,
     )
 
     # Exit if analysis object not made correctly
